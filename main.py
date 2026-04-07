@@ -89,9 +89,9 @@ def task1():
     total_time = time_without_pause + total_pause_time
     
     print(f"\nРезультаты:")
-    print(f"Время перебора всех паролей (без учета пауз): {format_time(time_without_pause)} ({format_time_detailed(time_without_pause)})")
-    print(f"Общее время пауз: {format_time(total_pause_time)} ({format_time_detailed(total_pause_time)})")
-    print(f"ИТОГОВОЕ ВРЕМЯ ПЕРЕБОРА: {format_time(total_time)}  ({format_time_detailed(total_time)})")
+    print(f"Время перебора всех паролей (без учета пауз): {format_time(time_without_pause)} ({format_time_detailed(time_without_pause)}) [{time_without_pause} секунд]")
+    print(f"Общее время пауз: {format_time(total_pause_time)} ({format_time_detailed(total_pause_time)}) [{total_pause_time} секунд]")
+    print(f"ИТОГОВОЕ ВРЕМЯ ПЕРЕБОРА: {format_time(total_time)}  ({format_time_detailed(total_time)}) [{total_time} секунд]")
 
 def task2():
     """Задача 2: Минимальная длина пароля для заданного времени"""
@@ -122,7 +122,7 @@ def task2():
     print(f"Требуемое количество паролей для перебора: {required_passwords:.2e}")
     print(f"Минимальная длина пароля: {min_k} символов")
     print(f"Фактическое количество паролей: {actual_passwords:,}")
-    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет) ({format_time_detailed(actual_time)})")
+    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет) ({format_time_detailed(actual_time)}) [{actual_time} секунд]")
 
 def task3():
     """Задача 3: Минимальная мощность алфавита"""
@@ -152,7 +152,7 @@ def task3():
     print(f"Требуемое количество паролей для перебора: {required_passwords:.2e}")
     print(f"Минимальная мощность алфавита: {min_n} символов")
     print(f"Фактическое количество паролей: {actual_passwords:,}")
-    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет) ({format_time_detailed(actual_time)})")
+    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет) ({format_time_detailed(actual_time)}) [{actual_time} секунд]")
 
 def main():
     print("\n" + "="*60)
@@ -211,9 +211,9 @@ def main():
             total_time = time_without_pause + total_pause_time
             
             print(f"Общее количество паролей: {total_passwords:,}")
-            print(f"Время без пауз: {format_time(time_without_pause)} ({format_time_detailed(time_without_pause)})")
-            print(f"Время пауз: {format_time(total_pause_time)} ({format_time_detailed(total_pause_time)})")
-            print(f"ИТОГО: {format_time(total_time)} ({format_time_detailed(total_time)})")
+            print(f"Время без пауз: {format_time(time_without_pause)} ({format_time_detailed(time_without_pause)}) [{time_without_pause} секунд]")
+            print(f"Время пауз: {format_time(total_pause_time)} ({format_time_detailed(total_pause_time)}) [{total_pause_time} секунд]")
+            print(f"ИТОГО: {format_time(total_time)} ({format_time_detailed(total_time)}) [{total_time} секунд]")
             
             print("\n" + "="*60)
             print("ЗАДАЧА 2")

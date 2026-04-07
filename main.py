@@ -174,7 +174,6 @@ def main():
             "3 - Определить минимальную мощность алфавита (количество символов), обеспечивающую заданное время перебора при фиксированной длине пароля.\n"
             "Определить количество символов алфавита, пароль состоит из k символов, время перебора которого было не меньше t лет. Скорость перебора s паролей в секунду.\n\n"
         )
-        print("4 - Выполнить все задачи")
         print("0 - Выход")
         
         choice = input("\nВаш выбор: ")
@@ -185,50 +184,6 @@ def main():
             task2()
         elif choice == '3':
             task3()
-        elif choice == '4':
-            print("\n" + "="*60)
-            print("ВЫПОЛНЕНИЕ ВСЕХ ЗАДАЧ")
-            print("="*60)
-            
-            # Общий ввод данных
-            print("\n--- Ввод общих данных ---")
-            n = int(default_input("Введите количество символов в алфавите (n): ", "11"))
-            k = int(default_input("Введите длину пароля (k): ", "7"))
-            s = float(default_input("Введите скорость перебора (паролей/сек): ", "50"))
-            t = float(default_input("Введите требуемое время перебора (лет): ", "90"))
-            m = int(default_input("Введите количество неправильных попыток до паузы (m): ", "7"))
-            v = float(default_input("Введите длительность паузы (сек): ", "12"))
-            
-            print("\n" + "="*60)
-            print("ЗАДАЧА 1")
-            print("="*60)
-            total_passwords = n ** k
-            time_without_pause = total_passwords / s
-            num_pauses = total_passwords // m
-            if total_passwords % m == 0:
-                num_pauses -= 1
-            total_pause_time = num_pauses * v
-            total_time = time_without_pause + total_pause_time
-            
-            print(f"Общее количество паролей: {total_passwords:,}")
-            print(f"Время без пауз: {format_time(time_without_pause)} ({format_time_detailed(time_without_pause)}) [{time_without_pause} секунд]")
-            print(f"Время пауз: {format_time(total_pause_time)} ({format_time_detailed(total_pause_time)}) [{total_pause_time} секунд]")
-            print(f"ИТОГО: {format_time(total_time)} ({format_time_detailed(total_time)}) [{total_time} секунд]")
-            
-            print("\n" + "="*60)
-            print("ЗАДАЧА 2")
-            print("="*60)
-            total_seconds = t * 365 * 24 * 3600
-            required_passwords = s * total_seconds
-            min_k = math.ceil(math.log(required_passwords) / math.log(n))
-            print(f"Минимальная длина пароля: {min_k} символов")
-            
-            print("\n" + "="*60)
-            print("ЗАДАЧА 3")
-            print("="*60)
-            min_n = math.ceil(required_passwords ** (1/k))
-            print(f"Минимальная мощность алфавита: {min_n} символов")
-            
         elif choice == '0':
             break
         else:

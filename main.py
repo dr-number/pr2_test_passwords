@@ -1,0 +1,190 @@
+import math
+
+def format_time(seconds):
+    """Convert seconds to human readable format"""
+    if seconds < 60:
+        return f"{seconds:.2f} сек"
+    elif seconds < 3600:
+        minutes = seconds / 60
+        return f"{minutes:.2f} мин"
+    elif seconds < 86400:
+        hours = seconds / 3600
+        return f"{hours:.2f} ч"
+    elif seconds < 31536000:  # 365 дней
+        days = seconds / 86400
+        return f"{days:.2f} дн"
+    else:
+        years = seconds / 31536000
+        return f"{years:.2f} лет"
+
+def task1():
+    """Задача 1: Интерактивный режим с паузами"""
+    print("\n" + "="*60)
+    print("ЗАДАЧА 1: Интерактивный режим (с паузами после неудачных попыток)")
+    print("="*60)
+    
+    n = int(input("Введите количество символов в алфавите (n): "))
+    k = int(input("Введите длину пароля (k): "))
+    s = float(input("Введите скорость перебора (паролей/сек): "))
+    m = int(input("Введите количество неправильных попыток до паузы (m): "))
+    v = float(input("Введите длительность паузы (сек): "))
+    
+    total_passwords = n ** k
+    print(f"\nОбщее количество возможных паролей: {total_passwords:,}")
+    
+    # Время без пауз
+    time_without_pause = total_passwords / s
+    
+    # Количество пауз
+    num_pauses = total_passwords // m
+    if total_passwords % m == 0:
+        num_pauses -= 1  # последняя успешная попытка не требует паузы
+    
+    total_pause_time = num_pauses * v
+    
+    total_time = time_without_pause + total_pause_time
+    
+    print(f"\nРезультаты:")
+    print(f"Время перебора всех паролей (без учета пауз): {format_time(time_without_pause)}")
+    print(f"Общее время пауз: {format_time(total_pause_time)}")
+    print(f"ИТОГОВОЕ ВРЕМЯ ПЕРЕБОРА: {format_time(total_time)}")
+
+def task2():
+    """Задача 2: Минимальная длина пароля для заданного времени"""
+    print("\n" + "="*60)
+    print("ЗАДАЧА 2: Определение минимальной длины пароля")
+    print("="*60)
+    
+    n = int(input("Введите количество символов в алфавите (n): "))
+    t = float(input("Введите требуемое время перебора (лет): "))
+    s = float(input("Введите скорость перебора (паролей/сек): "))
+    
+    # Переводим годы в секунды
+    total_seconds = t * 365 * 24 * 3600
+    
+    # Общее количество паролей = n^k
+    # n^k >= s * total_seconds
+    # k >= log(s * total_seconds) / log(n)
+    
+    required_passwords = s * total_seconds
+    min_k = math.ceil(math.log(required_passwords) / math.log(n))
+    
+    # Проверяем, что получилось
+    actual_passwords = n ** min_k
+    actual_time = actual_passwords / s
+    actual_time_years = actual_time / (365 * 24 * 3600)
+    
+    print(f"\nРезультаты:")
+    print(f"Требуемое количество паролей для перебора: {required_passwords:.2e}")
+    print(f"Минимальная длина пароля: {min_k} символов")
+    print(f"Фактическое количество паролей: {actual_passwords:,}")
+    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет)")
+
+def task3():
+    """Задача 3: Минимальная мощность алфавита"""
+    print("\n" + "="*60)
+    print("ЗАДАЧА 3: Определение минимальной мощности алфавита")
+    print("="*60)
+    
+    k = int(input("Введите длину пароля (k): "))
+    t = float(input("Введите требуемое время перебора (лет): "))
+    s = float(input("Введите скорость перебора (паролей/сек): "))
+    
+    # Переводим годы в секунды
+    total_seconds = t * 365 * 24 * 3600
+    
+    # n^k >= s * total_seconds
+    # n >= (s * total_seconds)^(1/k)
+    
+    required_passwords = s * total_seconds
+    min_n = math.ceil(required_passwords ** (1/k))
+    
+    # Проверяем
+    actual_passwords = min_n ** k
+    actual_time = actual_passwords / s
+    actual_time_years = actual_time / (365 * 24 * 3600)
+    
+    print(f"\nРезультаты:")
+    print(f"Требуемое количество паролей для перебора: {required_passwords:.2e}")
+    print(f"Минимальная мощность алфавита: {min_n} символов")
+    print(f"Фактическое количество паролей: {actual_passwords:,}")
+    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет)")
+
+def main():
+    print("\n" + "="*60)
+    print("РАСЧЕТ ПАРАМЕТРОВ ПАРОЛЬНОЙ СИСТЕМЫ ЗАЩИТЫ")
+    print("="*60)
+    
+    while True:
+        print("\nВыберите задачу:")
+        print("1 - Интерактивный режим (с паузами)")
+        print("2 - Минимальная длина пароля")
+        print("3 - Минимальная мощность алфавита")
+        print("4 - Выполнить все задачи")
+        print("0 - Выход")
+        
+        choice = input("\nВаш выбор: ")
+        
+        if choice == '1':
+            task1()
+        elif choice == '2':
+            task2()
+        elif choice == '3':
+            task3()
+        elif choice == '4':
+            print("\n" + "="*60)
+            print("ВЫПОЛНЕНИЕ ВСЕХ ЗАДАЧ")
+            print("="*60)
+            
+            # Общий ввод данных
+            print("\n--- Ввод общих данных ---")
+            n = int(input("Введите количество символов в алфавите (n): "))
+            k = int(input("Введите длину пароля (k): "))
+            s = float(input("Введите скорость перебора (паролей/сек): "))
+            t = float(input("Введите требуемое время перебора (лет): "))
+            m = int(input("Введите количество неправильных попыток до паузы (m): "))
+            v = float(input("Введите длительность паузы (сек): "))
+            
+            # Задача 1
+            print("\n" + "="*60)
+            print("ЗАДАЧА 1")
+            print("="*60)
+            total_passwords = n ** k
+            time_without_pause = total_passwords / s
+            num_pauses = total_passwords // m
+            if total_passwords % m == 0:
+                num_pauses -= 1
+            total_pause_time = num_pauses * v
+            total_time = time_without_pause + total_pause_time
+            
+            print(f"Общее количество паролей: {total_passwords:,}")
+            print(f"Время без пауз: {format_time(time_without_pause)}")
+            print(f"Время пауз: {format_time(total_pause_time)}")
+            print(f"ИТОГО: {format_time(total_time)}")
+            
+            # Задача 2
+            print("\n" + "="*60)
+            print("ЗАДАЧА 2")
+            print("="*60)
+            total_seconds = t * 365 * 24 * 3600
+            required_passwords = s * total_seconds
+            min_k = math.ceil(math.log(required_passwords) / math.log(n))
+            print(f"Минимальная длина пароля: {min_k} символов")
+            
+            # Задача 3
+            print("\n" + "="*60)
+            print("ЗАДАЧА 3")
+            print("="*60)
+            min_n = math.ceil(required_passwords ** (1/k))
+            print(f"Минимальная мощность алфавита: {min_n} символов")
+            
+        elif choice == '0':
+            print("\nДо свидания!")
+            break
+        else:
+            print("\nНеверный выбор. Пожалуйста, попробуйте снова.")
+        
+        input("\nНажмите Enter для продолжения...")
+
+if __name__ == "__main__":
+    main()

@@ -155,7 +155,6 @@ def main():
             m = int(input("Введите количество неправильных попыток до паузы (m): "))
             v = float(input("Введите длительность паузы (сек): "))
             
-            # Задача 1
             print("\n" + "="*60)
             print("ЗАДАЧА 1")
             print("="*60)
@@ -172,7 +171,6 @@ def main():
             print(f"Время пауз: {format_time(total_pause_time)}")
             print(f"ИТОГО: {format_time(total_time)}")
             
-            # Задача 2
             print("\n" + "="*60)
             print("ЗАДАЧА 2")
             print("="*60)
@@ -181,7 +179,6 @@ def main():
             min_k = math.ceil(math.log(required_passwords) / math.log(n))
             print(f"Минимальная длина пароля: {min_k} символов")
             
-            # Задача 3
             print("\n" + "="*60)
             print("ЗАДАЧА 3")
             print("="*60)
@@ -189,7 +186,6 @@ def main():
             print(f"Минимальная мощность алфавита: {min_n} символов")
             
         elif choice == '0':
-            print("\nДо свидания!")
             break
         else:
             print("\nНеверный выбор. Пожалуйста, попробуйте снова.")

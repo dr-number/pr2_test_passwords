@@ -24,6 +24,42 @@ def format_time(seconds):
     else:
         years = seconds / 31536000
         return f"{years:.2f} лет"
+    
+def format_time_detailed(seconds):
+    """Convert seconds to detailed format: days, hours, minutes, seconds"""
+    if seconds < 0:
+        return "0 сек"
+    
+    # Целое количество секунд
+    total_seconds = int(seconds)
+    
+    years = total_seconds // 31536000  # 365 дней
+    remaining = total_seconds % 31536000
+    
+    days = remaining // 86400
+    remaining = remaining % 86400
+    
+    hours = remaining // 3600
+    remaining = remaining % 3600
+    
+    minutes = remaining // 60
+    secs = remaining % 60
+    
+    # Формируем строку результата
+    parts = []
+    
+    if years > 0:
+        parts.append(f"{years} {'год' if years == 1 else 'года' if 2 <= years <= 4 else 'лет'}")
+    if days > 0:
+        parts.append(f"{days} {'день' if days == 1 else 'дня' if 2 <= days <= 4 else 'дней'}")
+    if hours > 0:
+        parts.append(f"{hours} {'час' if hours == 1 else 'часа' if 2 <= hours <= 4 else 'часов'}")
+    if minutes > 0:
+        parts.append(f"{minutes} {'минута' if minutes == 1 else 'минуты' if 2 <= minutes <= 4 else 'минут'}")
+    if secs > 0 or not parts:  # добавляем секунды, если есть или если других единиц нет
+        parts.append(f"{secs} {'секунда' if secs == 1 else 'секунды' if 2 <= secs <= 4 else 'секунд'}")
+    
+    return ", ".join(parts)
 
 def task1():
     """Задача 1: Интерактивный режим с паузами"""
@@ -53,9 +89,9 @@ def task1():
     total_time = time_without_pause + total_pause_time
     
     print(f"\nРезультаты:")
-    print(f"Время перебора всех паролей (без учета пауз): {format_time(time_without_pause)}")
-    print(f"Общее время пауз: {format_time(total_pause_time)}")
-    print(f"ИТОГОВОЕ ВРЕМЯ ПЕРЕБОРА: {format_time(total_time)}")
+    print(f"Время перебора всех паролей (без учета пауз): {format_time(time_without_pause)} ({format_time_detailed(time_without_pause)})")
+    print(f"Общее время пауз: {format_time(total_pause_time)} ({format_time_detailed(total_pause_time)})")
+    print(f"ИТОГОВОЕ ВРЕМЯ ПЕРЕБОРА: {format_time(total_time)}  ({format_time_detailed(total_time)})")
 
 def task2():
     """Задача 2: Минимальная длина пароля для заданного времени"""
@@ -86,7 +122,7 @@ def task2():
     print(f"Требуемое количество паролей для перебора: {required_passwords:.2e}")
     print(f"Минимальная длина пароля: {min_k} символов")
     print(f"Фактическое количество паролей: {actual_passwords:,}")
-    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет)")
+    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет) ({format_time_detailed(actual_time)})")
 
 def task3():
     """Задача 3: Минимальная мощность алфавита"""
@@ -116,7 +152,7 @@ def task3():
     print(f"Требуемое количество паролей для перебора: {required_passwords:.2e}")
     print(f"Минимальная мощность алфавита: {min_n} символов")
     print(f"Фактическое количество паролей: {actual_passwords:,}")
-    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет)")
+    print(f"Фактическое время перебора: {format_time(actual_time)} ({actual_time_years:.2f} лет) ({format_time_detailed(actual_time)})")
 
 def main():
     print("\n" + "="*60)
@@ -175,9 +211,9 @@ def main():
             total_time = time_without_pause + total_pause_time
             
             print(f"Общее количество паролей: {total_passwords:,}")
-            print(f"Время без пауз: {format_time(time_without_pause)}")
-            print(f"Время пауз: {format_time(total_pause_time)}")
-            print(f"ИТОГО: {format_time(total_time)}")
+            print(f"Время без пауз: {format_time(time_without_pause)} ({format_time_detailed(time_without_pause)})")
+            print(f"Время пауз: {format_time(total_pause_time)} ({format_time_detailed(total_pause_time)})")
+            print(f"ИТОГО: {format_time(total_time)} ({format_time_detailed(total_time)})")
             
             print("\n" + "="*60)
             print("ЗАДАЧА 2")

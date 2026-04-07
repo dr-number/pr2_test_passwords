@@ -1,5 +1,13 @@
 import math
 
+def default_input(text: str, default_value: str) -> str:
+    inp = input(f"{text} [{default_value}]: ")
+    if not inp:
+        return default_value
+    
+    return inp
+
+
 def format_time(seconds):
     """Convert seconds to human readable format"""
     if seconds < 60:
@@ -23,11 +31,11 @@ def task1():
     print("ЗАДАЧА 1: Интерактивный режим (с паузами после неудачных попыток)")
     print("="*60)
     
-    n = int(input("Введите количество символов в алфавите (n): "))
-    k = int(input("Введите длину пароля (k): "))
-    s = float(input("Введите скорость перебора (паролей/сек): "))
-    m = int(input("Введите количество неправильных попыток до паузы (m): "))
-    v = float(input("Введите длительность паузы (сек): "))
+    n = int(default_input("Введите количество символов в алфавите (n): ", "11"))
+    k = int(default_input("Введите длину пароля (k): ", "7"))
+    s = float(default_input("Введите скорость перебора (паролей/сек): ", "50"))
+    m = int(default_input("Введите количество неправильных попыток до паузы (m): ", "7"))
+    v = float(default_input("Введите длительность паузы (сек): ", "12"))
     
     total_passwords = n ** k
     print(f"\nОбщее количество возможных паролей: {total_passwords:,}")
